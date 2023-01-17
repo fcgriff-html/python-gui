@@ -1,0 +1,75 @@
+this code created a box and then labeled it with the below text
+from tkinter import *
+root = Tk()
+
+my_label = Label(root, text = 'Hello World')
+
+my_label.pack()
+
+root.mainloop() 
+
+////////////////////
+
+this code creates a 500x500 pixel initial box (adjustable) with an icon (apple.ico)
+and two lines of text each listed with the Label().pack() command
+root.mainloop() runs the box
+
+from tkinter import * 
+root = Tk()
+
+root.title('My Box Gui')
+root.iconbitmap('apple.ico')
+root.geometry("500x500")
+
+my_label = Label(root, text = "hello").pack()
+my_label2 = Label(root, text = "how are you doing?").pack()
+
+root.mainloop()
+
+////////////////////
+
+this code specifies the gui box to display the labels on a grid within the box
+this also opens the code in the 500x500 pixel size
+.grid() also seems to remove the need for a .pack() command
+
+
+from tkinter import * 
+root = Tk()
+
+root.title('my gui app')
+root.iconbitmap('star.ico')
+root.geometry("500x500")
+
+my_label = Label(root, text='my new gui app').grid(row=0, column=0)
+my_label2 = Label(root, text='this is line 2').grid(row=1, column=0)
+
+#my_label.grid(row=0, column = 1)
+#my_label2.grid(row=0, column = 2)
+
+root.mainloop()
+
+////////////////////
+
+from tkinter import *
+root = Tk()
+
+root.title('My Button')
+root.iconbitmap('apple.ico')
+root.geometry('500x500')
+
+
+#now when the button is clicked this label will display
+#the .pack() command will display the label beneath the button while the 
+#.grid() command will not work as the button already controls the geometry
+# it results in this error 'cannot use geometry manager grid inside . which already has slaves managed by pack'
+def my_click():
+    my_label = Label(root, text='welcome to the app', fg='#3371FF').pack()
+
+my_button = Button(root, text='click this button', command=my_click, fg='black', bg='#33FFCA', padx=30, pady=30)
+my_button.pack() #the button wont do anything eithout the command argument
+#fg and bg args are the foreground and background colors, they accept hex and colors, padx, pady arg is padding and takes and int variable
+
+root.mainloop()
+
+////////////////////
+

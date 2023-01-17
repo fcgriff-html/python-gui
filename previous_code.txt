@@ -73,3 +73,76 @@ root.mainloop()
 
 ////////////////////
 
+from tkinter import *
+root = Tk()
+
+root.title('my entry box')
+root.iconbitmap('apple.ico')
+root.geometry('500x500')
+
+#entry is an entry box that operated within root
+#if you try to do a one liner here, you set e to the result of the .pack() command
+#this in turn makes it so that you cannot access the internal portions of the entry
+e = Entry(root, width=50, fg='black')
+e.grid(row=0, column=1)
+#you can say .pack(), but .grid will alow you to organize where the textbox appears
+#grid also prevents the screen from filling with the result
+
+ee = Entry(root, width=30, fg="black")
+ee.grid(row=0, column=2)
+def my_click():
+    my_label = Label(root, text='hello ' + e.get()).grid(row=3, column=1)
+    #the above grabs the text from the entry and displays it
+    e.delete(0, END)
+
+def my_click2():
+    my_label2 = Label(root, text='hello ' + ee.get()).grid(row=3, column=2)
+    ee.delete(0, END)
+
+my_button = Button(root, text='Enter your first name', padx=10, pady=10, bg='white', fg='green', command=my_click)
+my_button.grid(row=2, column=1)
+
+my_button2 = Button(root, text='Enter your last name', padx=10, pady=10, bg='white', fg='green', command=my_click2)
+my_button2.grid(row=2, column=2)
+
+
+#because there is a pack() command we cant use grid, so we have to adjust the pack to grid
+
+root.mainloop()
+
+////////////////////
+
+from tkinter import *
+root = Tk()
+
+root.title('my Radio Button App')
+root.iconbitmap('star.ico')
+root.geometry('500x500')
+
+q = IntVar()
+q.get()
+q.set('2')
+#q gets initialized as 0 and displayed if we do not set it, anyway
+
+def my_click(value):
+    my_label = Label(root, text = value)
+    my_label.pack()
+
+Radiobutton(root, text='1', variable=q , value=1).pack(anchor='w')
+Radiobutton(root, text='2', variable=q, value=2).pack(anchor='w')
+Radiobutton(root, text='3', variable=q , value=3).pack(anchor='w')
+Radiobutton(root, text='4', variable=q , value=4).pack(anchor='w')
+
+my_label = Label(root, text= q.get())
+my_label.pack()
+
+my_button = Button(root, text='Submit', command=lambda:my_click(q.get()))
+my_button.pack()
+#the lambda expression allows us to pass the value obtained from the radio button to the function my_click()
+
+
+
+root.mainloop()
+
+////////////////////
+

@@ -488,3 +488,183 @@ root.mainloop()
 
 ////////////////////
 
+below code displays a label on a button click, and then deletes the label if its active
+otherwise the delete button does nothing
+from tkinter import *
+root = Tk()
+
+root.title('Remove Label App')
+root.iconbitmap('apple.ico')
+root.geometry('500x500')
+root.configure(background='gray')
+
+def click_add():
+    global l1 #global tag allows us to ignore the scope of l1 in this function
+    l1 = Label(root, text='whats up')
+    l1.pack()
+     b1['state'] = DISABLED #this disables the button when the label is displayed
+
+def click_del():
+    l1.destroy() #this only destroys the last added label
+    b1['state'] = NORMAL #this re enables the button on delete
+
+b1 = Button(root, text='display label', command=click_add)
+b1.pack(padx=20, pady=20)
+
+b2 = Button(root, text='delete label', command=click_del)
+b2.pack(padx=10, pady=10)
+
+root.mainloop()
+
+////////////////////
+
+the below code displays a pie chart (or alternatively a histogram) on a button click
+using the numpy and matplot libraries
+
+from tkinter import *
+import matplotlib.pyplot as plt # pip install -U pip, pip install -U matplotlib
+import numpy as np
+root = Tk()
+
+root.title('matplot app')
+root.iconbitmap('star.ico')
+root.geometry('500x500')
+root.configure(background='grey')
+
+def graphs():
+    house = np.random.normal(20000, 25000, 5000)
+    plt.hist(house, 80)
+    plt.show()
+
+def graph_get():
+    exp_val = [1500, 600, 700, 400, 250]
+    exp_labels = ['House rent', 'Internet Bill', 'Food', 'Fuel Charges', 'Others']
+
+    plt.pie(exp_val, label=exp_labels, radius=1.5, autopct='%0.2f%%') #autopct displays the percentage rounded to the decimal format
+    plt.axis('equal')
+    plt.show()
+
+b1 = Button(root, text='result.get', command=graph_get)
+b1.pack()
+
+root.mainloop()
+
+////////////////////
+
+the below code generates a random index in a list and pulls it as a winner
+
+from tkinter import *
+from random import randint
+root = Tk()
+
+root.title('Random Winner App')
+root.iconbitmap('apple.ico')
+root.geometry('500x500')
+
+def pick():
+    lst = [
+        'P1',
+        'P2',
+        'P3',
+        'P4',
+        'P5',
+        'P6',
+        'P7',
+        'P8',
+    ]
+
+    entry_set = set(lst)
+    unique_list = list(entry_set)
+    our_num = len(unique_list)-1
+    rand = randint(0,our_num)
+
+    winner_label = Label(root, text=unique_list[rand], font=('Helvetica', 30))
+    winner_label.pack(padx=20, pady=20)
+
+poster_label = Label(root, text='Random Winner', font=('Arial Black', 25))
+poster_label.pack(padx=10,pady=10)
+
+winButton = Button(root, text='Pick Your Winner', command=pick, font=('Arial', 30))
+winButton.pack(padx=20, pady=20)
+
+root.mainloop()
+
+////////////////////
+
+the pyinstaller stuff at the bottom of this is how you install an app on desktop
+
+from tkinter import *
+from random import randint
+root = Tk()
+
+root.title('pyEXE app')
+root.iconbitmap('apple.ico')
+root.geometry('500x500')
+
+def pick():
+    lst = [
+        'P1',
+        'P2',
+        'P3',
+        'P4',
+        'P5',
+        'P6',
+        'P7',
+        'P8',
+    ]
+
+    entry_set = set(lst)
+    unique_list = list(entry_set)
+    our_num = len(unique_list)-1
+    rand = randint(0,our_num)
+
+    winner_label = Label(root, text=unique_list[rand], font=('Helvetica', 30))
+    winner_label.pack(padx=20, pady=20)
+
+poster_label = Label(root, text='Random Winner', font=('Arial Black', 25))
+poster_label.pack(padx=10,pady=10)
+
+winButton = Button(root, text='Pick Your Winner', command=pick, font=('Arial', 30))
+winButton.pack(padx=20, pady=20)
+
+root.mainloop()
+
+##pip install pyinstaller
+## pyinstaller.exe --onefile --icon-apple.ico pyEXE.py
+
+////////////////////
+
+this code deletes and overwrites the label
+
+from tkinter import *
+root = Tk()
+
+root.title('Overwrite Labels')
+root.iconbitmap('apple.ico')
+root.geometry('500x500')
+
+def click():
+    global l1
+    hello_user = 'Hello ' + e.get()
+    l1 = Label(root, text= hello_user, font=('Arial', 25))
+    l1.grid(row=3, column=0)
+    e.delete(0, END)
+    b1['state']=DISABLED
+
+def delete():
+    l1.grid_forget()
+    b1['state']=NORMAL
+
+e = Entry(root, width=18, font=('Arial', 20))
+e.grid(row=0,column=0)
+
+b1 = Button(root, text='name here', command=click)
+b1.grid(row=1,column=0)
+
+delbtn = Button(root, text='delete text', command=delete)
+delbtn.grid(row=6,column=0)
+
+root.mainloop()
+
+////////////////////
+
